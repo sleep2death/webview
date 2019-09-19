@@ -1,6 +1,6 @@
-import {loader} from '../core'
+import { loader } from '../core'
 
-export default function() {
+export default function () {
   return new Promise(resolve => {
     loader
       .add('static/textures/misc.json')

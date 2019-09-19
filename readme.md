@@ -1,11 +1,6 @@
-# fish
+# EightyOne
 
-将[pixi-filters](https://github.com/pixijs/pixi-filters)搬运到微信小游戏。
-仅作`pixi.js`开发微信小游戏展示之用。
-
-[视频预览](https://static.lufei.so/c06638f149ce76f6ab8631d954f4a838.mp4)
-
-## 开发
+## Dev
 ```bash
 # clone 项目
 git clone git@github.com:JetLua/fish.git

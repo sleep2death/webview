@@ -1,6 +1,5 @@
-import {game, prepare} from './scenes'
+import { game, prepare } from './scenes'
 
 prepare().then(() => {
   game.show()
 })
-

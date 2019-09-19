@@ -1,14 +1,13 @@
-import {ticker, stage, screen} from '../core'
+import { ticker, stage, screen } from '../core'
 
-const
-  {max, random, PI, sin, cos} = Math,
-  PI2 = PI * 2
+const { max, random, PI, sin, cos } = Math
+const PI2 = PI * 2
 
 export default {
   fishes: [],
   bound: screen.clone(),
 
-  init() {
+  init () {
     this.container = new PIXI.Container()
     /* 湖底 */
     this.bed = PIXI.Sprite.from('bkg.jpg')
@@ -25,10 +24,10 @@ export default {
 
       fish.speed = (1 + random()) * 2
       fish.direction = random() * PI2
-      fish.turnSpeed = random() - .8
+      fish.turnSpeed = random() - 0.8
 
       fish.position.set(random() * screen.width, random() * screen.height)
-      fish.anchor.set(.5)
+      fish.anchor.set(0.5)
 
       this.fishes.push(fish)
       this.container.addChild(fish)
@@ -46,23 +45,32 @@ export default {
     this.bound.pad(100)
   },
 
-  update() {
-    const {bound, overlay, fishes} = this
+  update () {
+    const { bound, overlay, fishes } = this
 
     for (const fish of fishes) {
-      fish.direction += fish.turnSpeed * .01
+      fish.direction += fish.turnSpeed * 0.01
       fish.direction %= PI2
       fish.rotation = fish.direction
       fish.x -= cos(fish.rotation) * fish.speed
       fish.y -= sin(fish.rotation) * fish.speed
 
-      fish.x < bound.left ? fish.x = bound.right :
-      fish.x > bound.right ? fish.x = bound.left : 0
+      if (fish.x < bound.left) {
+        fish.x = bound.right
+      } else if (fish.x > bound.right) {
+        fish.x = bound.left
+      } else {
+        // fish.x = 0
+      }
 
-      fish.y < bound.top ? fish.y = bound.bottom :
-      fish.y > bound.bottom ? fish.y = bound.top : 0
+      if (fish.y < bound.top) {
+        fish.x = bound.bottom
+      } else if (fish.y > bound.bottom) {
+        fish.y = bound.top
+      } else {
+        // fish.y = 0
+      }
     }
-
 
     overlay.tilePosition.x -= 1
     overlay.tilePosition.y -= 1
@@ -71,7 +79,7 @@ export default {
     overlay.tilePosition.y %= 512
   },
 
-  show() {
+  show () {
     this.init()
     stage.addChild(this.container)
     ticker.add(this.update, this)
